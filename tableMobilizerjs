@@ -1,0 +1,118 @@
+<script>
+
+var RowBlock = function () {
+    this.head = [];
+    this.data = {};
+};
+
+
+
+var MobileBrokerTable = function () {};
+
+MobileBrokerTable.prototype.gather = function () {
+    this.element = document.getElementById('PricingDetails');
+
+    $.each($(this.element).find('thead th'), function (i,v) {
+
+        bodyData.head.push($(v).text().trim());
+        // obj[i] = $(v).text().trim();
+        // bodyData.head.push(obj);
+    });
+
+    var rowObj = {};
+    $.each($(this.element).find('tbody tr'), function (rIdx, rData) {
+
+        var colObj = {};
+
+        $.each($(rData).children(), function (cIdx, cData) {
+            var varObj = {};
+
+            varObj.content = $(cData).html().trim().replace(/\s\s+/g, ' ');
+            varObj.classes = $(cData).attr('class').split(' ');
+
+            colObj[cIdx] = varObj;
+        });
+
+        rowObj[rIdx] = colObj;
+
+    });
+
+    bodyData.data = rowObj;
+
+    this.construct();
+};
+
+MobileBrokerTable.prototype.construct = function () {
+    // Objective...build a block.
+    // Block is:
+    //      1 row with 1 col (colspan 2) with section name
+    //      6 rows of 2 cols
+    //          col 1 is company name
+    //          col 2 is value
+    //
+    var obj = bodyData;
+
+    var templateHead = [
+        '<tr>',
+            '<th colspan="2" class="bcc-mobile-block-header">{{value}}<th>',
+        '</tr>'
+    ].join("\n");
+
+    var templateRow = [
+        '<tr>',
+            '<th class="{{class}} mod-mobile">{{company}}</th>',
+            '<td class="{{class}} mod-mobile">{{value}}</td>',
+        '</tr>'
+    ].join("\n");
+
+    $('.bcc-wrap').append('<table id="bccMobile" class="bcc mod-mobile" cellspacing="0" cellpadding="0"></table>');
+
+
+    $.each(obj.data, function (rIdx, rVal) {
+        var blockHtml;
+
+        $.each(rVal, function (cIdx, cVal) {
+
+            var template;
+            var mapObj = {
+               '{{class}}': cVal.classes.join(' '),
+               '{{value}}': cVal.content,
+               '{{company}}': obj.head[cIdx]
+            };
+
+            if (cIdx === '0') {
+                template = templateHead;
+            } else {
+                template = templateRow;
+            }
+
+            var reg = new RegExp(Object.keys(mapObj).join("|"),"gi");
+
+            blockHtml += template.replace(reg, function(matched){
+              return mapObj[matched];
+            });
+
+        });
+
+        $('#bccMobile').append(blockHtml);
+    });
+
+
+    // Append it...
+}
+
+
+if(isMobile() === true) {
+
+    var bodyData = new RowBlock();
+    var brokerTable = new MobileBrokerTable();
+
+
+    brokerTable.gather();
+
+    $('.bcc-desktop').hide();
+
+}
+
+
+</script>
