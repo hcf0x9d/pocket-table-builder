@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Table Mobilizer</title>
+    <title>Pocket Table Builder</title>
+
+<!-- ======================================================================= -->
+<!-- Required Styles                                                         -->
+<!-- ======================================================================= -->
+
+<!-- Pretend there are styles here for now... -->
+
+<!-- ======================================================================= -->
+<!-- END Required Styles                                                     -->
+<!-- ======================================================================= -->
+
 </head>
 <body>
 
 <section class="container">
-    <!-- Broker Comparison Chart -->
-    <div class="row bcc-wrap">
+    <div class="row">
+
+<!-- ======================================================================= -->
+<!-- Our Table Element                                                       -->
+<!-- ======================================================================= -->
+
         <table id="PricingDetails" class="bcc col-md-10 col-md-push-1 bcc-desktop" cellspacing="0" cellpadding="0">
             <caption class="">Comparison Chart</caption>
             <thead>
@@ -278,15 +293,39 @@
                 </td>
             </tfoot>
         </table>
-    </div>
 
+<!-- ======================================================================= -->
+<!-- END Table Element                                                       -->
+<!-- ======================================================================= -->
+
+    </div>
 </section>
+
+<!-- ======================================================================= -->
+<!-- Required Scripts                                                        -->
+<!-- ======================================================================= -->
+
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous">
 </script>
 
-<script src="scripts.js"></script>
+<!-- The plugin -->
 <script src="pocketTableBuilder.js"></script>
+
+<!-- ======================================================================= -->
+<!-- END Required Scripts                                                    -->
+<!-- ======================================================================= -->
+
+<script>
+    // Initialize the plugin
+    $(function () {
+
+        // Currently is designed to work with IDs. Please give your table
+        // a unique ID
+        $('#PricingDetails').pocketTableBuilder();
+    });
+</script>
 </body>
 </html>
