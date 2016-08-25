@@ -7,9 +7,6 @@ plugin detects a mobile experience.  Be warned.  This is a work in progress.  Ju
 
 ## Code Example
 
-Include the `stylesheet` in your project (TODO: Make a stylesheet).
-```<link rel="stylesheet" href="pocketTableBuilder.min.css">```
-
 Add the `script` to the project along with jQuery.
 ```
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"

@@ -96,7 +96,7 @@
                 // using a handlebars style approach to data management.
                 var templateHead = [
                     '<tr>',
-                        '<th colspan="2" class="mobileTable-block-header">{{value}}<th>',
+                        '<th colspan="2" class="{{class}}">{{value}}<th>',
                     '</tr>'
                 ].join("\n");
 
@@ -104,14 +104,14 @@
                 // a handlebars style data merge syntax.
                 var templateRow = [
                     '<tr>',
-                        '<th class="{{class}} mod-mobile">{{company}}</th>',
+                        '<th class="{{class}} mod-mobile">{{firstCol}}</th>',
                         '<td class="{{class}} mod-mobile">{{value}}</td>',
                     '</tr>'
                 ].join("\n");
 
                 // Find the original table's parent and append a new table to it.  This is
                 // what we will turn into our mobile table.
-                $('#' + obj.selector).parent().append('<table id="bccMobile" class="bcc mod-mobile" cellspacing="0" cellpadding="0"></table>');
+                $('#' + obj.selector).parent().append('<table id="tableMobile" class="table mod-mobile" cellspacing="0" cellpadding="0"></table>');
 
                 // Iterate through the MobileTable object's data, returning a row index and
                 // row contents
@@ -132,7 +132,7 @@
                         var mapObj = {
                            '{{class}}': cVal.classes.join(' '),
                            '{{value}}': cVal.content,
-                           '{{company}}': obj.head[cIdx]
+                           '{{firstCol}}': obj.head[cIdx]
                         };
 
                         // If the column index is zero, then we are dealing with the first
@@ -155,7 +155,7 @@
 
                     // Append the html to the template added earlier.
                     // TODO: Make this more obfuscated
-                    $('#bccMobile').append(blockHtml);
+                    $('#tableMobile').append(blockHtml);
                 });
 
                 // Hide the original table - the desktop version.

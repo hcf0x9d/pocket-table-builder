@@ -1,0 +1,2 @@
+.table{border-collapse:collapse;table-layout:fixed}.table-th{border:1px solid #ccc;height:4em;padding:10px;text-align:center;vertical-align:middle}.table-th.mod-firstCol{background:#fff;text-align:right}.table-th.mod-headerRow{background:#ccc}.table-td{background:#fff;border:1px solid #ccc;height:4em;padding:10px;text-align:center;vertical-align:middle}@media screen and (max-width: 767px){.table{margin:20px}.table-th.mod-firstCol{background:#ccc;text-align:center}.table-td{width:50%}}
+/*# sourceMappingURL=pocketTableBuilder.min.css.map */

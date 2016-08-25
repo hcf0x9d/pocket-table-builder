@@ -1,0 +1,48 @@
+.table {
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    &-th {
+        border: 1px solid #ccc;
+        height: 4em;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+
+        &.mod-firstCol {
+            background: #fff;
+            text-align: right;
+        }
+
+        &.mod-headerRow {
+            background: #ccc;
+        }
+    }
+
+    &-td {
+        background: #fff;
+        border: 1px solid #ccc;
+        height: 4em;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .table {
+        margin: 20px;
+
+        &-th {
+
+            &.mod-firstCol {
+                background: #ccc;
+                text-align: center;
+            }
+        }
+
+        &-td {
+            width: 50%;
+        }
+    }
+}
