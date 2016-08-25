@@ -1,26 +1,27 @@
-<script>
 
-var RowBlock = function () {
+/**
+ * The RowBlock is the object that will hold all of the information
+ */
+var MobileBrokerTable = function (selector) {
+    this.selector = selector
     this.head = [];
     this.data = {};
 };
 
-
-
-var MobileBrokerTable = function () {};
-
 MobileBrokerTable.prototype.gather = function () {
-    this.element = document.getElementById('PricingDetails');
+    var obj = this;
 
-    $.each($(this.element).find('thead th'), function (i,v) {
+    obj.element = document.getElementById(obj.selector);
 
-        bodyData.head.push($(v).text().trim());
+    $.each($(obj.element).find('thead th'), function (i,v) {
+
+        obj.head.push($(v).text().trim());
         // obj[i] = $(v).text().trim();
         // bodyData.head.push(obj);
     });
 
     var rowObj = {};
-    $.each($(this.element).find('tbody tr'), function (rIdx, rData) {
+    $.each($(obj.element).find('tbody tr'), function (rIdx, rData) {
 
         var colObj = {};
 
@@ -37,24 +38,18 @@ MobileBrokerTable.prototype.gather = function () {
 
     });
 
-    bodyData.data = rowObj;
+    obj.data = rowObj;
 
-    this.construct();
+    obj.construct();
 };
 
 MobileBrokerTable.prototype.construct = function () {
-    // Objective...build a block.
-    // Block is:
-    //      1 row with 1 col (colspan 2) with section name
-    //      6 rows of 2 cols
-    //          col 1 is company name
-    //          col 2 is value
-    //
-    var obj = bodyData;
+
+    var obj = this;
 
     var templateHead = [
         '<tr>',
-            '<th colspan="2" class="bcc-mobile-block-header">{{value}}<th>',
+            '<th colspan="2" class="mobileTable-block-header">{{value}}<th>',
         '</tr>'
     ].join("\n");
 
@@ -99,20 +94,15 @@ MobileBrokerTable.prototype.construct = function () {
 
 
     // Append it...
-}
+};
 
 
 if(isMobile() === true) {
 
-    var bodyData = new RowBlock();
-    var brokerTable = new MobileBrokerTable();
-
+    var brokerTable = new MobileBrokerTable('PricingDetails');
 
     brokerTable.gather();
 
     $('.bcc-desktop').hide();
 
 }
-
-
-</script>
