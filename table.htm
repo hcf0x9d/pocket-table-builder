@@ -167,123 +167,7 @@
                         $1,000<sup style="line-height:1px;">2</sup>
                     </td>
                 </tr>
-                <tr>
-                    <th class="table-th mod-firstCol">
-                        Margin Rate <span class="helper">($25,001 - $49,999)</span>
-                    </th>
-                    <td class="table-td">
-                        7.25%
-                    </td>
-                    <td class="table-td">
-                        7.575%
-                    </td>
-                    <td class="table-td">
-                        7.5%
-                    </td>
-                    <td class="table-td">
-                        8.75%
-                    </td>
-                    <td class="table-td">
-                        8.19%
-                    </td>
-                    <td class="table-td">
-                        8.00%
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-th mod-firstCol">
-                        <a class="triggerPopSmall" href="#">Express Funding</a>
-                    </th>
-                    <td class="table-td">
-                        Offered
-                    </td>
-                    <td class="table-td">
-                        Not offered
-                    </td>
-                    <td class="table-td">
-                        Offered
-                    </td>
-                    <td class="table-td">
-                        Offered
-                    </td>
-                    <td class="table-td">
-                        Not offered
-                    </td>
-                    <td class="table-td">
-                        Not offered
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-th mod-firstCol">
-                        Smartphone App
-                    </th>
-                    <td class="table-td">
-                        iPhone&reg;, Android&trade;, Windows&reg; Phone
-                    </td>
-                    <td class="table-td">
-                        iPhone, Android, Windows Phone
-                    </td>
-                    <td class="table-td">
-                        iPhone, Android
-                    </td>
-                    <td class="table-td">
-                        iPhone, Android, BlackBerry, Windows Phone
-                    </td>
-                    <td class="table-td">
-                        iPhone, Android, Windows Phone
-                    </td>
-                    <td class="table-td">
-                        iPhone, Android
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-th mod-firstCol">
-                        Tablet App
-                    </th>
-                    <td class="table-td">
-                        iPad&reg;, Kindle Fire&trade;
-                    </td>
-                    <td class="table-td">
-                        iPad
-                    </td>
-                    <td class="table-td">
-                        iPad, Android, Kindle Fire
-                    </td>
-                    <td class="table-td">
-                        iPad, Android, Kindle Fire
-                    </td>
-                    <td class="table-td">
-                        iPad, Android, Kindle Fire
-                    </td>
-                    <td class="table-td">
-                        iPad, Kindle Fire
-                    </td>
-                </tr>
-                <tr>
-                    <th class="table-th mod-firstCol">
-                        Broker Assisted Trades
-                    </th>
-                    <td class="table-td">
-                        $19.95
-                    </td>
-                    <td class="table-td">
-                        $32.95
-                    </td>
-                    <td class="table-td">
-                        $32.00
-                    </td>
-                    <td class="table-td">
-                        $44.99
-                    </td>
-                    <td class="table-td">
-                        Commission
-                        + $25.00
-                    </td>
-                    <td class="table-td">
-                        $8.95 + $25.00
-                        service charge
-                    </td>
-                </tr>
+
             </tbody>
         </table>
 
@@ -298,12 +182,6 @@
 <!-- Required Scripts                                                        -->
 <!-- ======================================================================= -->
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
-</script>
-
 <!-- The plugin -->
 <script src="pocketTableBuilder.js"></script>
 
@@ -313,12 +191,9 @@
 
 <script>
     // Initialize the plugin
-    $(function () {
 
-        // Currently is designed to work with IDs. Please give your table
-        // a unique ID
-        $('#PricingDetails').pocketTableBuilder();
-    });
+    var mobileTable = new MobileTable('PricingDetails');
+    mobileTable.run();
 </script>
 </body>
 </html>
