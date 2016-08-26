@@ -7,20 +7,15 @@ plugin detects a mobile experience.  Be warned.  This is a work in progress.  Ju
 
 ## Code Example
 
-Add the `script` to the project along with jQuery.
+Add the `script` to the project.
 ```
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
-</script>
 <script src="pocketTableBuilder.js"></script>
 ```
 
-Initialize the plugin on your table element using the table's `ID`.
+Call the class to initialze by using the table's `ID`.
 ```
-$(function () {
-    $('#PricingDetails').pocketTableBuilder();
-});
+var mobileTable = new MobileTable('PricingDetails');
+mobileTable.run();
 ```
 
 The plugin will auto detect whether or not the environment is mobile or not.  Keep in mind, it looks for user agents.
