@@ -1,11 +1,10 @@
-
 /**
  * The Mobile Table Constructor
  *
  * @param {String} selector - ID name for the table to mobilize
  */
 var MobileTable = function (selector) {
-    this.selector = selector;   // Selector attribute TODO: Probably don't need this now
+    this.selector = selector;   // Selector attribute
     this.head = [];             // Array of values in the header row of the table
     this.data = [];             // Object housing all of the data within the table
     this.run = function () {
@@ -14,7 +13,6 @@ var MobileTable = function (selector) {
         }
     };
 };
-
 
 /**
  * Is this a mobile device?
@@ -48,21 +46,17 @@ MobileTable.prototype.gather = function () {
     obj.element = document.getElementById(obj.selector);
     $body = obj.element.querySelector('tbody');
 
-    // For each of the <th> elements within the <thead>...
-    // Return the index (column number) and value (text)
+    // Find each of the <th> elements in the <thead>
     obj.element.querySelectorAll('th.mod-headerRow').forEach(function (html, i) {
 
-        // if (i > 0) {
-            // Push the text of this <th> to the MobileTable.head array. We add trim
-            // to remove the unneccessary white space on the ends of the string
-            obj.head.push(html.innerHTML.trim());
-        // }
+        // Push the text of this <th> to the MobileTable.head array. We add trim
+        // to remove the unneccessary white space on the ends of the string
+        obj.head.push(html.innerHTML.trim());
     });
 
     // Temporarily build a row and column object that we can discard later
     var row,
         rows = [],
-        col,
         cols,
         varObj;
 
@@ -70,22 +64,27 @@ MobileTable.prototype.gather = function () {
     // Return the row index (row number) and row data (cells)
     $body.querySelectorAll('tr').forEach(function (rHtml, rIdx, rObj) {
 
+        // The row we will be analyzing
         row = rObj[rIdx];
 
         // Clear the column object
         cols = [];
 
+        // For each of the columns, grab the attributes and content
         for (var i = 0; i < row.children.length; i++) {
             varObj = {};
             varObj.content = row.children[i].innerHTML.trim();
             varObj.classes = row.children[i].className.split(' ');
 
+            // Push the attributes and content to the columns array.
             cols.push(varObj);
         }
+
+        // Push the columns array to the rows array
         rows.push(cols);
     });
 
-    // Store the row object in the MobileTable.data object
+    // Store the rows array in the MobileTable.data object
     obj.data = rows;
 
     // Run the mobile table constructor (bad name choice probably)
@@ -110,48 +109,45 @@ MobileTable.prototype.construct = function () {
 
     $table.parentElement.appendChild(mobTable);
 
-    // Prep the blockHtml variable - we will use this for appending content
-    var blockHtml = '';
-
     // Iterate through the MobileTable object's data, returning a row index and
     // row contents
     obj.data.forEach(function (row, ri) {
+        var mobTableRow, mobTableCell, mobRowHead;
 
-        $table.parentElement.appendChild(mobTable);
-
+        // Iterate through the rows and collect the cells and cell index
         row.forEach(function (cell, ci) {
-            var mobTableRow = '',
-                mobTableCell = '',
-                mobRowHead = '';
 
-            // If the column index is zero, then we are dealing with the first
-            // column which turns into the block header, set the template to the
-            // header template and move on.  Otherwise, default to the row template
-
+            // Create a new Table Row
             mobTableRow = document.createElement('TR');
 
+            // If the Cell Index is 0, this will become our header with a colspan
+            // of 2 cells.
             if (ci === 0) {
                 mobTableCell = document.createElement('TH');
                 mobTableCell.setAttribute('class', cell.classes.join(' '));
                 mobTableCell.setAttribute('colspan', 2);
             } else {
 
+                // Otherwise we need to build the header cell to the left (label)
                 mobRowHead = document.createElement('TH');
                 mobRowHead.setAttribute('class', cell.classes.join(' '));
                 mobRowHead.innerHTML = obj.head[ci];
 
+                // Append the cell
                 mobTableRow.appendChild(mobRowHead);
+
+                // Then create our value cell
                 mobTableCell = document.createElement('TD');
             }
 
+            // Fill the value cell with the things we need
             mobTableCell.setAttribute('class', cell.classes.join(' '));
             mobTableCell.innerHTML = cell.content;
 
+            // Double append.
             mobTableRow.appendChild(mobTableCell);
-            mobTable.append(mobTableRow);
+            mobTable.appendChild(mobTableRow);
         });
-
-
     });
 
     // Hide the original table - the desktop version.

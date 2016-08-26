@@ -22,6 +22,9 @@ The plugin will auto detect whether or not the environment is mobile or not.  Ke
 If the mobile environment is detected, the plugin will build a mobile version of your table based on the data in the
 desktop version of the table.
 
+This script could take a while to load the data depending on how heavy your table is.  Perhaps you could add your script
+to a Web Worker to keep things rolling smoothly.
+
 ## Installation
 
 Fork the project or download a zip, include it in your project and start mashing tables.
